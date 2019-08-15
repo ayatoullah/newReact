@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
+// import Radium , {StyleRoot} from 'radium';
 import Person from './Person/Person.js'
 
 class App extends Component {
@@ -66,13 +67,17 @@ class App extends Component {
   render(){
     console.log('show person inside render',this.state.showPersons);
     const style={
-      backgroundColor : 'white',
+      backgroundColor : 'green',
       border :'1px solid blue ',
       padding :'1%',
       marginTop :'1%',
       boderRadius :'3%',
       width : '50%',
-      font :'inherits'
+      font :'inherits',
+      // ':hover' :{
+      //   backgroundColor : 'lightgreen',
+      //   color : 'black'
+      // }
     }
     let persons=null;
     //console.log()
@@ -102,16 +107,32 @@ class App extends Component {
          
         </div>
       );
+      style.backgroundColor ='red';
+      // style[':hover'] ={
+      //   backgroundColor : 'orange',
+      //   color : 'black'
+      // };
+      
       
     }
-    //console.log('persons',persons);
+    //let classes=['red','bold'].join(' ');
+    let classes=[];
+    if (this.state.persons.length<=2){
+      classes.push('red');
+    }
+    if (this.state.persons.length<=1){
+      classes.push('bold');
+    }
     return(
-      <div className="App">
+      // <StyleRoot>
+        <div className="App">
+        <p className={classes.join(' ')}>this is my first app in react</p>
         <button style={style} onClick={this.togglePersonsHandler}>click me</button>
 
        
         {persons}
       </div>
+      // </StyleRoot>
     );
     // return React.createElement('div',{ className:'App'},React.createElement('h1',null,'Ramy'));
     
