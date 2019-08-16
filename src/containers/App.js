@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import classes from'./App.css';
-// import Radium , {StyleRoot} from 'radium';
-import Person from '../components/Persons/Person/Person.js';
-import ErrorBoundary from './ErrorBoundary/ErrorBoundary';
+import Persons from '../components/Persons/Persons';
+import Cockpit from '../components/Cockpit/Cockpit';
 
 
 class App extends Component {
@@ -83,60 +82,37 @@ class App extends Component {
     }
     let persons=null;
     //console.log()
-    let btnClass='';
+    
     
     if(this.state.showPersons){  
       persons = (
         <div>
         {
           
-          Array.from(this.state.persons).map( 
-            
-            (person , index )=> {
-            
-            console.log('inside map');
-            console.log(index);
-            console.log('inside render state.persons',this.state.persons);
-            return <Person 
-                  click={ () =>this.deletePersonHandler(index)}
-                  name={person.name}
-                  age={person.age}
-                  key={person.id}
-                  changed={(event) => {this.nameChangedHandler(event,person.id)}}/>
-          })
+         <Persons persons={this.state.persons}
+         clicked={this.deletePersonHandler}
+         changed={this.nameChangedHandler}/>
         }
          
          
         </div>
       );
       style.backgroundColor ='red';
-      btnClass=classes.Red;
-      // style[':hover'] ={
-      //   backgroundColor : 'orange',
-      //   color : 'black'
-      // };
-      
+ 
       
     }
-    //let classes=['red','bold'].join(' ');
-    let assClasses=[];
-    if (this.state.persons.length<=2){
-      //classes.push('red');
-      assClasses.push(classes.red);
 
-    }
-    if (this.state.persons.length<=1){
-      assClasses.push(classes.bold);
-    }
+    
     return(
       // <StyleRoot>
-        <div className={classes.App}>
-        <p className={assClasses.join( ' ' )}>this is my first app in react</p>
-        <button className={btnClass} style={style} onClick={this.togglePersonsHandler}>click me</button>
-
-       
-        {persons}
+      <div className={classes.App}>
+          <Cockpit showPersons={this.state.showPersons}
+                   persons={this.state.persons}
+                   clicked={this.togglePersonsHandler}
+                   appTitle={this.props.title}/>
+              {persons}
       </div>
+      
       // </StyleRoot>
     );
     // return React.createElement('div',{ className:'App'},React.createElement('h1',null,'Ramy'));
