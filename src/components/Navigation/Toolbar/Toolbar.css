@@ -18,3 +18,12 @@
     height:100%;
     
 }
+.Logo{
+    height:80%;
+}
+@Media(max-width:499px){
+    .DesktopOnly{
+        display:none;
+    }
+
+}
